@@ -1,0 +1,63 @@
+
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="jumbotron"  style="background: #121212 !important;margin-bottom:0px;">
+    <div class="container">
+      <h1 id="article-main-title"> Recent articles </h1>
+    </div>
+</div>
+    <section class="recent-articles">
+
+      <div class="container article-list">
+        <div class="articles">
+          {% for article in articles|slice:":4" %}
+
+            <div class="article-snippet">
+              <p><img src="{{ article.thumb.url }}" alt="" style="width:200px;height:200px;padding-left:10px;"> </p>
+              <br>
+              <h2 id="article-list-title" text-justify= "inter-word"> <a href="{% url 'firstapp:detail' slug=article.slug %}" style="text-decoration:none;">{{ article.title }}</a> </h2>
+              <p >{{ article.snippet|safe }}</p>
+              <p><em style="font-size:12px;">{{ article.date }}</em></p>
+              <br>
+
+            </div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+    </section>
+
+
+
+
+    <section class="details-card">
+      <div class="jumbotron"  style="background:#121212 !important;";>
+          <div class="container">
+            <h1 id="article-main-title1"> All Articles </h1>
+          </div>
+      </div>
+        <div class="container">
+            <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4">
+                    <div class="card-content" style="padding-top:20px;">
+                        <div class="card-img">
+                            <img src="{{ article.thumb.url }}" alt="">
+                            <span><h4><a href="{% url 'firstapp:detail' slug=article.slug %}" style="text-decoration:none;">{{ article.titleSnippet }}</a></h4></span>
+                        </div>
+                        <div class="card-desc">
+                            <h3></h3>
+                            <p>{{ article.snippet|safe }}</p>
+                                <a href="" class="btn-card">Read</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+  {% endblock %}
+
+    <!-- details card section starts from here -->

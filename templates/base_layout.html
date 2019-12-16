@@ -1,0 +1,111 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+    <link rel="stylesheet" href="{% static 'css/mystyle_darkmode.css' %}" media="(prefers-color-scheme: dark)">
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.0/smooth-scroll.polyfills.js" integrity="sha256-k6FBqpTYTvkmmCLAaYnWFv0eim3Sot8PoKE3BpFYTfk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <section id="nav-bar">
+      <nav class="navbar navbar-expand-lg navbar-light">
+         <a class="navbar-brand" href="{% url 'firstapp:home' %}">
+           <img src="{% static 'svg/logo.svg' %}" alt="">
+         </a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <i class="fa fa-bars"></i>
+         </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"> <dark-mode-toggle id="dark-mode-toggle-1" appearance="switch" dark="Dark" light="Light" style="float:right;"></dark-mode-toggle></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hello {{ user }}</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              <form class="logout" action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <a href="{% url 'firstapp:create' %}" class="btn btn-success btn-lg">Create an article</a>
+                <button class="btn btn-danger btn-lg" type="submit">Logout</button>
+
+              </form>
+
+            </li>
+            {% else %}
+            <li>
+
+              <a href="{% url 'accounts:signup' %}" class="btn btn-primary btn-lg "style="float:right;">Sign Up</a>
+              <a href="{% url 'accounts:login' %}" class="btn btn-success btn-lg " style="float:right;margin-right:20px;">Login</a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <div class="wrapper">
+
+
+      {% block content %}
+
+      {% endblock %}
+
+    </div>
+
+
+    <!-- Footer ------>
+    <section id="section-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 footer-box">
+              <img src="{% static 'svg/logo.svg' %}" alt="">
+              <p>I am a fourth year software engineering student at Nepal College of Information technology,
+                learning and complete projects  as i go.</p>
+            </div>
+            <div class="col-md-4 footer-box">
+                <p id="contact"><b>Location</b></p>
+                <p><i class="fa fa-map-marker"></i>Koteswor,Kathmandu</p>
+                <p><i class="fa fa-phone"></i>+977-984-779-7811</p>
+                <p><i class="fa fa-envelope-o"></i>sajjanpaudel811@gmail.com</p>
+            </div>
+            <div class="col-md-4 footer-box">
+                <p><b>SUBSCRIBE NEWSLETTER</b></p>
+                <input type="email"class="form-control" placeholder="Your Email">
+                <button type="button"class="btn btn-primary" name="button">Subscribe</button>
+
+                <div id="social">
+                    <p>Find Me On Social Media</p>
+                       <div class="social-icons">
+                          <a href="https://www.facebook.com/sajjan.paudel" class="svg-icons"><img src="{% static 'svg/facebook-logo.svg' %}" alt=""></a>
+                          <a href="https://instagram.com/sajjanpaudel" class="svg-icons"><img src="{% static 'svg/instagram_.svg' %}" alt=""></a>
+                          <a href="https://twitter.com/ninjabutlazy" class="svg-icons"><img src="{% static 'svg/twitter-logo.svg' %}" alt=""></a>
+                          <a href="https://github.com/sajjanpaudel" class="svg-icons"><img src="{% static 'svg/github.png' %}" alt=""></a>
+                       </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+              <p class="copyright">Copyright © 2019.</p>
+            </div>
+
+          </div>
+          <br>
+        </div>
+    </section>
+
+
+
+  </body>
+</html>

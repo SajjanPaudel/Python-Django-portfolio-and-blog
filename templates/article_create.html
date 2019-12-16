@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+  <div class="container">
+    <h1 style="color:white;">This is where you add articles</h1>
+    <form class="site-form" action="{% url 'firstapp:create' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" name="" value="Create">
+    </form>
+
+  </div>
+<script src="{% static 'js/slugify.js' %}"></script>
+{% endblock %}

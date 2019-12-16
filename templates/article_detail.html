@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+  <div class="article_detail">
+      <div class="article_container">
+        <div class="jumbotron"  style="background: linear-gradient(to right, #1723b1,#58f0ff) !important;">
+          <div class="container">
+            <h2 id = "article-title">
+              {{ article.title }}
+              <p></p>
+              <p id="article-author-date"> <em>Author-{{ article.author }} Date-{{ article.date }}</em></p>
+            </h2>
+          </div>
+        </div>
+        <div class="container article-detail">
+          <img src="{{ article.thumb.url }}" />
+        <p id="article-body"> {{ article.body|safe }} </p>
+
+        <p>{{ article.date }}</p>
+        </div>
+    </div>
+  </div>
+{% endblock %}
